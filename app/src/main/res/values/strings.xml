@@ -8,4 +8,7 @@
     <string name="desiredph_label">Desired pH</string>
     <string name="currentlight_label">Current Light</string>
     <string name="desiredlight_label">Desired Light</string>
+    <string name="controltemp_label">Temperature Control</string>
+    <string name="controlph_label">pH Control</string>
+    <string name="controllight_label">Light Control</string>
 </resources>
