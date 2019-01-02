@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TomatoController</string>
+    <string name="sensorfeed_label">Sensor Feed</string>
+    <string name="controlsettings_label">Control Settings</string>
+</resources>
