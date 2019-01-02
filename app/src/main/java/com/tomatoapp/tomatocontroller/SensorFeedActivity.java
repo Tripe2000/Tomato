@@ -34,17 +34,15 @@ public class SensorFeedActivity extends AppCompatActivity {
         textView_C = (TextView)findViewById(R.id.textView12);
     }
 
-    //widgets
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_feed);
 
-        //init variables
+        //initiate variables
         init();
 
-        //set value of widgets
+        //set initial values of widgets
         textView_A.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + ".textview.a", 5)));
         textView_B.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + ".textview.b", 5)));
         textView_C.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + ".textview.c", 5)));

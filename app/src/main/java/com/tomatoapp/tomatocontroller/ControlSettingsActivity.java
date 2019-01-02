@@ -19,7 +19,7 @@ public class ControlSettingsActivity extends AppCompatActivity {
         //setup data persistence
         final SharedPreferences prefs = this.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
 
-        //setup listeners
+        //setup widgets
         Switch switch_A = (Switch) findViewById(R.id.switch2);
         Switch switch_B = (Switch) findViewById(R.id.switch3);
         Switch switch_C = (Switch) findViewById(R.id.switch4);
@@ -27,6 +27,7 @@ public class ControlSettingsActivity extends AppCompatActivity {
         Switch switch_E = (Switch) findViewById(R.id.switch6);
         Switch switch_F = (Switch) findViewById(R.id.switch7);
 
+        //set initial values of widgets
         switch_A.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.a", true));
         switch_B.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.b", true));
         switch_C.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.c", true));
@@ -34,6 +35,7 @@ public class ControlSettingsActivity extends AppCompatActivity {
         switch_E.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.e", true));
         switch_F.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.f", true));
 
+        //setup listeners
         switch_A.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor editor = prefs.edit();
