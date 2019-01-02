@@ -20,42 +20,43 @@ public class ControlSettingsActivity extends AppCompatActivity {
         final SharedPreferences prefs = this.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
 
         //setup widgets
-        Switch switch_A = (Switch) findViewById(R.id.switch2);
-        Switch switch_B = (Switch) findViewById(R.id.switch3);
-        Switch switch_C = (Switch) findViewById(R.id.switch4);
+        Switch switch_tempControl = (Switch) findViewById(R.id.tempControl);
+        Switch switch_phControl = (Switch) findViewById(R.id.phControl);
+        Switch switch_lightControl = (Switch) findViewById(R.id.lightControl);
         Switch switch_D = (Switch) findViewById(R.id.switch5);
         Switch switch_E = (Switch) findViewById(R.id.switch6);
         Switch switch_F = (Switch) findViewById(R.id.switch7);
 
         //set initial values of widgets
-        switch_A.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.a", true));
-        switch_B.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.b", true));
-        switch_C.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.c", true));
+        switch_tempControl.setChecked(prefs.getBoolean(PACKAGE_NAME + R.string.control_temp_key, true));
+        switch_phControl.setChecked(prefs.getBoolean(PACKAGE_NAME + R.string.control_ph_key, true));
+        switch_lightControl.setChecked(prefs.getBoolean(PACKAGE_NAME + R.string.control_light_key, true));
+        //TO DO: to be changed to receive initial value data from raspberry pi
         switch_D.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.d", true));
         switch_E.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.e", true));
         switch_F.setChecked(prefs.getBoolean(PACKAGE_NAME + ".switch.f", true));
 
         //setup listeners
-        switch_A.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switch_tempControl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean(PACKAGE_NAME + ".switch.a", isChecked);
+                editor.putBoolean(PACKAGE_NAME + R.string.control_temp_key, isChecked);
                 editor.apply();
             }
         });
 
-        switch_B.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switch_phControl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean(PACKAGE_NAME + ".switch.b", isChecked);
+                editor.putBoolean(PACKAGE_NAME + R.string.control_ph_key, isChecked);
                 editor.apply();
             }
         });
 
-        switch_C.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switch_lightControl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putBoolean(PACKAGE_NAME + ".switch.c", isChecked);
+                editor.putBoolean(PACKAGE_NAME + R.string.control_light_key, isChecked);
                 editor.apply();
             }
         });

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="goToSensorFeedActivity"
-        android:text="@string/sensorfeed_label"
+        android:text="@string/sensor_feed_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:onClick="goToControlSettingsActivity"
-        android:text="@string/controlsettings_label"
+        android:text="@string/control_settings_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
