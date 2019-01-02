@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import static android.view.View.GONE;
 import static com.tomatoapp.tomatocontroller.MainActivity.PACKAGE_NAME;
 
 public class SensorFeedActivity extends AppCompatActivity {
@@ -23,6 +24,9 @@ public class SensorFeedActivity extends AppCompatActivity {
     TextView textView_desiredTemp;
     TextView textView_desiredPh;
     TextView textView_desiredLight;
+    TextView textView_desiredTemp_label;
+    TextView textView_desiredPh_label;
+    TextView textView_desiredLight_label;
     Button button_apply;
 
     private void init() {
@@ -37,6 +41,9 @@ public class SensorFeedActivity extends AppCompatActivity {
         textView_desiredTemp = (TextView)findViewById(R.id.desiredTemp);
         textView_desiredPh = (TextView)findViewById(R.id.desiredPh);
         textView_desiredLight = (TextView)findViewById(R.id.desiredLight);
+        textView_desiredTemp_label = (TextView)findViewById(R.id.desiredTempLabel);
+        textView_desiredPh_label = (TextView)findViewById(R.id.desiredPhLabel);
+        textView_desiredLight_label = (TextView)findViewById(R.id.desiredLightLabel);
         button_apply = (Button)findViewById(R.id.apply);
     }
 
@@ -51,15 +58,32 @@ public class SensorFeedActivity extends AppCompatActivity {
         //set initial values of widgets
         button_apply.setEnabled(false);
 
-        textView_desiredTemp.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_temp_key, 5)));
-        textView_desiredPh.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_ph_key, 5)));
-        textView_desiredLight.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_light_key, 5)));
+        if(prefs.getBoolean(PACKAGE_NAME + R.string.control_temp_key, true)) {
+            textView_desiredTemp.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_temp_key, 5)));
+            seekBar_temp.setProgress(Integer.parseInt(textView_desiredTemp.getText().toString()));
+        } else {
+            seekBar_temp.setVisibility(GONE);
+            textView_desiredTemp.setVisibility(GONE);
+            textView_desiredTemp_label.setVisibility(GONE);
+        }
 
-        seekBar_temp.setProgress(Integer.parseInt(textView_desiredTemp.getText().toString()));
-        seekBar_ph.setProgress(Integer.parseInt(textView_desiredPh.getText().toString()));
-        seekBar_light.setProgress(Integer.parseInt(textView_desiredLight.getText().toString()));
+        if(prefs.getBoolean(PACKAGE_NAME + R.string.control_ph_key, true)) {
+            textView_desiredPh.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_ph_key, 5)));
+            seekBar_ph.setProgress(Integer.parseInt(textView_desiredPh.getText().toString()));
+        } else {
+            seekBar_ph.setVisibility(GONE);
+            textView_desiredPh.setVisibility(GONE);
+            textView_desiredPh_label.setVisibility(GONE);
+        }
 
-        if(prefs.getBoolean(PACKAGE_NAME + "", true))
+        if(prefs.getBoolean(PACKAGE_NAME + R.string.control_light_key, true)) {
+            textView_desiredLight.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_light_key, 5)));
+            seekBar_light.setProgress(Integer.parseInt(textView_desiredLight.getText().toString()));
+        } else {
+            seekBar_light.setVisibility(GONE);
+            textView_desiredLight.setVisibility(GONE);
+            textView_desiredLight_label.setVisibility(GONE);
+        }
 
         //add seekbar listeners
         seekBar_temp.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -103,9 +127,9 @@ public class SensorFeedActivity extends AppCompatActivity {
     }
 
     public void apply(View view) {
-        editor.putInt(PACKAGE_NAME + R.string.desired_temp_key, Integer.parseInt(textView_desiredTemp.getText().toString()));
-        editor.putInt(PACKAGE_NAME + R.string.desired_ph_key, Integer.parseInt(textView_desiredPh.getText().toString()));
-        editor.putInt(PACKAGE_NAME + R.string.desired_light_key, Integer.parseInt(textView_desiredLight.getText().toString()));
+        if(textView_desiredTemp.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_temp_key, Integer.parseInt(textView_desiredTemp.getText().toString()));
+        if(textView_desiredPh.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_ph_key, Integer.parseInt(textView_desiredPh.getText().toString()));
+        if(textView_desiredLight.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_light_key, Integer.parseInt(textView_desiredLight.getText().toString()));
         editor.apply();
         button_apply.setEnabled(false);
     }

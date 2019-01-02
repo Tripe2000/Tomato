@@ -42,10 +42,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/desiredTempLabel" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/desiredTempLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -62,8 +62,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="desired_temp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/desiredTempLabel"
+        app:layout_constraintStart_toEndOf="@+id/desiredTempLabel" />
 
     <TextView
         android:id="@+id/textView5"
@@ -107,11 +107,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="desired_ph"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
-        app:layout_constraintStart_toEndOf="@+id/textView8" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/desiredPhLabel"
+        app:layout_constraintStart_toEndOf="@+id/desiredPhLabel" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/desiredPhLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -135,7 +135,7 @@
         android:progress="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/desiredPhLabel" />
 
     <View
         android:id="@+id/divider2"
@@ -173,7 +173,7 @@
         app:layout_constraintStart_toEndOf="@+id/textView9" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/desiredLightLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -190,8 +190,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="desired_light"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
-        app:layout_constraintStart_toEndOf="@+id/textView11" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/desiredLightLabel"
+        app:layout_constraintStart_toEndOf="@+id/desiredLightLabel" />
 
     <SeekBar
         android:id="@+id/desiredLightBar"
@@ -207,7 +207,7 @@
         android:progress="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/desiredLightLabel" />
 
     <Button
         android:id="@+id/apply"
