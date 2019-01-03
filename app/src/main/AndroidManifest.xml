@@ -22,9 +22,12 @@
         <activity
             android:name=".ControlSettingsActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".TemperatureLogActivity" />
-        <activity android:name=".PhLogActivity" />
-        <activity android:name=".LightLogActivity"></activity>
+        <activity android:name=".TemperatureLogActivity"
+            android:parentActivityName=".SensorFeedActivity"/>
+        <activity android:name=".PhLogActivity"
+            android:parentActivityName=".SensorFeedActivity"/>
+        <activity android:name=".LightLogActivity"
+            android:parentActivityName=".SensorFeedActivity" />
     </application>
 
 </manifest>
