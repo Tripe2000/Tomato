@@ -19,17 +19,14 @@ public class SensorFeedActivity extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
-    //others
-    Context currentContext;
-
     //widgets
     SeekBar seekBar_temp;
     SeekBar seekBar_ph;
     SeekBar seekBar_light;
 
-    TextView textView_desiredTemp;
-    TextView textView_desiredPh;
-    TextView textView_desiredLight;
+    TextView desiredTemp;
+    TextView desiredPh;
+    TextView desiredLight;
 
     Button button_apply;
 
@@ -37,36 +34,25 @@ public class SensorFeedActivity extends AppCompatActivity {
     ConstraintLayout desiredPhLayout;
     ConstraintLayout desiredLightLayout;
 
-    ConstraintLayout currentTempLayout;
-    ConstraintLayout currentPhLayout;
-    ConstraintLayout currentLightLayout;
-
     private void init() {
         //setup data persistence
         prefs = this.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);;
         editor = prefs.edit();
-
-        //others
-        currentContext = this;
 
         //widgets
         seekBar_temp = findViewById(R.id.desiredTempBar);
         seekBar_ph = findViewById(R.id.desiredPhBar);
         seekBar_light = findViewById(R.id.desiredLightBar);
 
-        textView_desiredTemp = findViewById(R.id.desiredTemp);
-        textView_desiredPh = findViewById(R.id.desiredPh);
-        textView_desiredLight = findViewById(R.id.desiredLight);
+        desiredTemp = findViewById(R.id.desiredTemp);
+        desiredPh = findViewById(R.id.desiredPh);
+        desiredLight = findViewById(R.id.desiredLight);
 
         button_apply = findViewById(R.id.apply);
 
         desiredTempLayout = findViewById(R.id.desiredTempLayout);
         desiredPhLayout = findViewById(R.id.desiredPhLayout);
         desiredLightLayout = findViewById(R.id.desiredLightLayout);
-
-        currentTempLayout = findViewById(R.id.currentTempLayout);
-        currentPhLayout = findViewById(R.id.currentPhLayout);
-        currentLightLayout = findViewById(R.id.currentLightLayout);
     }
 
     @Override
@@ -81,7 +67,7 @@ public class SensorFeedActivity extends AppCompatActivity {
         seekBar_temp.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textView_desiredTemp.setText(String.valueOf(progress));
+                desiredTemp.setText(String.valueOf(progress));
                 button_apply.setEnabled(true);
             }
 
@@ -94,7 +80,7 @@ public class SensorFeedActivity extends AppCompatActivity {
         seekBar_ph.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textView_desiredPh.setText(String.valueOf(progress));
+                desiredPh.setText(String.valueOf(progress));
                 button_apply.setEnabled(true);
             }
 
@@ -107,7 +93,7 @@ public class SensorFeedActivity extends AppCompatActivity {
         seekBar_light.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textView_desiredLight.setText(String.valueOf(progress));
+                desiredLight.setText(String.valueOf(progress));
                 button_apply.setEnabled(true);
             }
 
@@ -115,31 +101,6 @@ public class SensorFeedActivity extends AppCompatActivity {
             public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-
-        //add layout listener
-        currentTempLayout.setOnClickListener(new ConstraintLayout.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(currentContext, TemperatureLogActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        currentPhLayout.setOnClickListener(new ConstraintLayout.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(currentContext, PhLogActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        currentLightLayout.setOnClickListener(new ConstraintLayout.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(currentContext, LightLogActivity.class);
-                startActivity(intent);
-            }
         });
     }
 
@@ -151,30 +112,30 @@ public class SensorFeedActivity extends AppCompatActivity {
         int flag = 0;
 
         if(prefs.getBoolean(PACKAGE_NAME + R.string.control_temp_key, true)) {
-            textView_desiredTemp.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_temp_key, 5)));
-            seekBar_temp.setProgress(Integer.parseInt(textView_desiredTemp.getText().toString()));
+            desiredTemp.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_temp_key, 5)));
+            seekBar_temp.setProgress(Integer.parseInt(desiredTemp.getText().toString()));
         } else {
             desiredTempLayout.setVisibility(GONE);
             flag++;
         }
 
         if(prefs.getBoolean(PACKAGE_NAME + R.string.control_ph_key, true)) {
-            textView_desiredPh.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_ph_key, 5)));
-            seekBar_ph.setProgress(Integer.parseInt(textView_desiredPh.getText().toString()));
+            desiredPh.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_ph_key, 5)));
+            seekBar_ph.setProgress(Integer.parseInt(desiredPh.getText().toString()));
         } else {
             desiredPhLayout.setVisibility(GONE);
             flag++;
         }
 
         if(prefs.getBoolean(PACKAGE_NAME + R.string.control_light_key, true)) {
-            textView_desiredLight.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_light_key, 5)));
-            seekBar_light.setProgress(Integer.parseInt(textView_desiredLight.getText().toString()));
+            desiredLight.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_light_key, 5)));
+            seekBar_light.setProgress(Integer.parseInt(desiredLight.getText().toString()));
         } else {
             desiredLightLayout.setVisibility(GONE);
             flag++;
         }
 
-        if(flag == 3) { button_apply.setVisibility(GONE); }
+        if(flag == 3) button_apply.setVisibility(GONE);
 
         //apply button starts disabled
         button_apply.setEnabled(false);
@@ -182,10 +143,25 @@ public class SensorFeedActivity extends AppCompatActivity {
 
     public void apply(View view) {
         //saves desired values
-        if(desiredTempLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_temp_key, Integer.parseInt(textView_desiredTemp.getText().toString()));
-        if(desiredPhLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_ph_key, Integer.parseInt(textView_desiredPh.getText().toString()));
-        if(desiredLightLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_light_key, Integer.parseInt(textView_desiredLight.getText().toString()));
+        if(desiredTempLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_temp_key, Integer.parseInt(desiredTemp.getText().toString()));
+        if(desiredPhLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_ph_key, Integer.parseInt(desiredPh.getText().toString()));
+        if(desiredLightLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_light_key, Integer.parseInt(desiredLight.getText().toString()));
         editor.apply();
         button_apply.setEnabled(false);
+    }
+
+    public void goToTempLog(View view) {
+        Intent intent = new Intent(this, TemperatureLogActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToPhLog(View view) {
+        Intent intent = new Intent(this, PhLogActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToLightLog(View view) {
+        Intent intent = new Intent(this, LightLogActivity.class);
+        startActivity(intent);
     }
 }

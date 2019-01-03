@@ -25,4 +25,5 @@
     <string name="max_x_label">Max X:</string>
     <string name="min_y_label">Min Y:</string>
     <string name="max_y_label">Max Y:</string>
+    <string name="change_password_label">Change Password</string>
 </resources>

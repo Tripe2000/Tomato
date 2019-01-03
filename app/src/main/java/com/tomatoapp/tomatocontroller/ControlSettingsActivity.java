@@ -1,9 +1,11 @@
 package com.tomatoapp.tomatocontroller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -84,5 +86,10 @@ public class ControlSettingsActivity extends AppCompatActivity {
                 editor.apply();
             }
         });
+    }
+
+    public void goToPasswordChange(View view) {
+        Intent intent = new Intent(this, SensorFeedActivity.class);
+        startActivity(intent);
     }
 }
