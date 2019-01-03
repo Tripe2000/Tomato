@@ -27,7 +27,7 @@ public class TemperatureLogActivity extends AppCompatActivity {
     private void init() {
         currentActivity = this;
 
-        tempGraph = findViewById(R.id.graph);
+        tempGraph = findViewById(R.id.tempGraph);
         tempGraph.setTitle("Temperature Log");
 
         glr = tempGraph.getGridLabelRenderer();

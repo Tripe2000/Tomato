@@ -147,9 +147,6 @@ public class SensorFeedActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        //apply button starts disabled
-        button_apply.setEnabled(false);
-
         //set initial values of widgets
         int flag = 0;
 
@@ -177,7 +174,10 @@ public class SensorFeedActivity extends AppCompatActivity {
             flag++;
         }
 
-        if(flag == 3)   button_apply.setVisibility(GONE);
+        if(flag == 3) { button_apply.setVisibility(GONE); }
+
+        //apply button starts disabled
+        button_apply.setEnabled(false);
     }
 
     public void apply(View view) {
