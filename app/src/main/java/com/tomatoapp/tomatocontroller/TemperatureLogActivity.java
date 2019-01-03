@@ -3,6 +3,7 @@ package com.tomatoapp.tomatocontroller;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
@@ -15,18 +16,32 @@ import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
 
 public class TemperatureLogActivity extends AppCompatActivity {
-    //graph related
+    //graph control
     GraphView tempGraph;
     GridLabelRenderer glr;
     Viewport vp;
     LineGraphSeries<DataPoint> series;
 
+    //graph stats
+    TextView minX;
+    TextView maxX;
+    TextView minY;
+    TextView maxY;
+
     //others
     Activity currentActivity;
 
     private void init() {
+        //initialize widgets
+        minX = findViewById(R.id.tempMinX);
+        maxX = findViewById(R.id.tempMaxX);
+        minY = findViewById(R.id.tempMinY);
+        maxY = findViewById(R.id.tempMaxY);
+
+        //initialize other variables
         currentActivity = this;
 
+        //setup graph
         tempGraph = findViewById(R.id.tempGraph);
         tempGraph.setTitle("Temperature Log");
 
@@ -73,6 +88,11 @@ public class TemperatureLogActivity extends AppCompatActivity {
         series.setDrawDataPoints(true);
         series.setDataPointsRadius(10);
 
+        minX.setText(String.valueOf(series.getLowestValueX()));
+        maxX.setText(String.valueOf(series.getHighestValueX()));
+        minY.setText(String.valueOf(series.getLowestValueY()));
+        maxY.setText(String.valueOf(series.getHighestValueY()));
+
         series.setOnDataPointTapListener(new OnDataPointTapListener() {
             @Override
             public void onTap(Series series, DataPointInterface dataPoint) {
@@ -91,5 +111,12 @@ public class TemperatureLogActivity extends AppCompatActivity {
 
         //initialize varaibles
         init();
+    }
+
+    private void updateGraph() {
+        minX.setText(String.valueOf(series.getLowestValueX()));
+        maxX.setText(String.valueOf(series.getHighestValueX()));
+        minY.setText(String.valueOf(series.getLowestValueY()));
+        maxY.setText(String.valueOf(series.getHighestValueY()));
     }
 }

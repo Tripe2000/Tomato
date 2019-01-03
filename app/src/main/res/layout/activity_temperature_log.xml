@@ -19,4 +19,101 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempGraph">
+
+        <TextView
+            android:id="@+id/tempMinXLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/min_x_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tempMaxXLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/max_x_label"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tempMinXLabel" />
+
+        <TextView
+            android:id="@+id/tempMinX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="TextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tempMinXLabel"
+            app:layout_constraintStart_toEndOf="@+id/tempMinXLabel" />
+
+        <TextView
+            android:id="@+id/tempMaxX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="TextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tempMaxXLabel"
+            app:layout_constraintStart_toEndOf="@+id/tempMaxXLabel" />
+
+        <TextView
+            android:id="@+id/tempMinYLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:text="@string/min_y_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tempMinXLabel"
+            app:layout_constraintStart_toEndOf="@+id/tempMaxX" />
+
+        <TextView
+            android:id="@+id/tempMaxYLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:text="@string/max_y_label"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tempMaxXLabel"
+            app:layout_constraintStart_toEndOf="@+id/tempMaxX" />
+
+        <TextView
+            android:id="@+id/tempMinY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="TextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tempMinYLabel"
+            app:layout_constraintStart_toEndOf="@+id/tempMinYLabel" />
+
+        <TextView
+            android:id="@+id/tempMaxY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="TextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tempMaxYLabel"
+            app:layout_constraintStart_toEndOf="@+id/tempMaxYLabel" />
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>

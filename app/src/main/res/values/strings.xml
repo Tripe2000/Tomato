@@ -21,4 +21,8 @@
     <string name="control_temp_key">.allow_temp_control</string>
     <string name="control_ph_key">.allow_ph_control</string>
     <string name="control_light_key">.allow_light_control</string>
+    <string name="min_x_label">Min X:</string>
+    <string name="max_x_label">Max X:</string>
+    <string name="min_y_label">Min Y:</string>
+    <string name="max_y_label">Max Y:</string>
 </resources>
