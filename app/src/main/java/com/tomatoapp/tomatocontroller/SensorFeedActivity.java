@@ -77,36 +77,6 @@ public class SensorFeedActivity extends AppCompatActivity {
         //initiate variables
         init();
 
-        //set initial values of widgets
-        int flag = 0;
-        button_apply.setEnabled(false);
-
-        if(prefs.getBoolean(PACKAGE_NAME + R.string.control_temp_key, true)) {
-            textView_desiredTemp.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_temp_key, 5)));
-            seekBar_temp.setProgress(Integer.parseInt(textView_desiredTemp.getText().toString()));
-        } else {
-            desiredTempLayout.setVisibility(GONE);
-            flag++;
-        }
-
-        if(prefs.getBoolean(PACKAGE_NAME + R.string.control_ph_key, true)) {
-            textView_desiredPh.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_ph_key, 5)));
-            seekBar_ph.setProgress(Integer.parseInt(textView_desiredPh.getText().toString()));
-        } else {
-            desiredPhLayout.setVisibility(GONE);
-            flag++;
-        }
-
-        if(prefs.getBoolean(PACKAGE_NAME + R.string.control_light_key, true)) {
-            textView_desiredLight.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_light_key, 5)));
-            seekBar_light.setProgress(Integer.parseInt(textView_desiredLight.getText().toString()));
-        } else {
-            desiredLightLayout.setVisibility(GONE);
-            flag++;
-        }
-
-        if(flag == 3)   button_apply.setVisibility(GONE);
-
         //add seekbar listeners
         seekBar_temp.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -173,7 +143,45 @@ public class SensorFeedActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //apply button starts disabled
+        button_apply.setEnabled(false);
+
+        //set initial values of widgets
+        int flag = 0;
+
+        if(prefs.getBoolean(PACKAGE_NAME + R.string.control_temp_key, true)) {
+            textView_desiredTemp.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_temp_key, 5)));
+            seekBar_temp.setProgress(Integer.parseInt(textView_desiredTemp.getText().toString()));
+        } else {
+            desiredTempLayout.setVisibility(GONE);
+            flag++;
+        }
+
+        if(prefs.getBoolean(PACKAGE_NAME + R.string.control_ph_key, true)) {
+            textView_desiredPh.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_ph_key, 5)));
+            seekBar_ph.setProgress(Integer.parseInt(textView_desiredPh.getText().toString()));
+        } else {
+            desiredPhLayout.setVisibility(GONE);
+            flag++;
+        }
+
+        if(prefs.getBoolean(PACKAGE_NAME + R.string.control_light_key, true)) {
+            textView_desiredLight.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_light_key, 5)));
+            seekBar_light.setProgress(Integer.parseInt(textView_desiredLight.getText().toString()));
+        } else {
+            desiredLightLayout.setVisibility(GONE);
+            flag++;
+        }
+
+        if(flag == 3)   button_apply.setVisibility(GONE);
+    }
+
     public void apply(View view) {
+        //saves desired values
         if(desiredTempLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_temp_key, Integer.parseInt(textView_desiredTemp.getText().toString()));
         if(desiredPhLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_ph_key, Integer.parseInt(textView_desiredPh.getText().toString()));
         if(desiredLightLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_light_key, Integer.parseInt(textView_desiredLight.getText().toString()));
