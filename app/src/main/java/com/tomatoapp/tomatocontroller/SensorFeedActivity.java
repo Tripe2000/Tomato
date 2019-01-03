@@ -1,6 +1,7 @@
 package com.tomatoapp.tomatocontroller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,9 @@ public class SensorFeedActivity extends AppCompatActivity {
     //persistence
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
+
+    //others
+    Context currentContext;
 
     //widgets
     SeekBar seekBar_temp;
@@ -41,6 +45,9 @@ public class SensorFeedActivity extends AppCompatActivity {
         //setup data persistence
         prefs = this.getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);;
         editor = prefs.edit();
+
+        //others
+        currentContext = this;
 
         //widgets
         seekBar_temp = findViewById(R.id.desiredTempBar);
@@ -144,18 +151,24 @@ public class SensorFeedActivity extends AppCompatActivity {
         currentTempLayout.setOnClickListener(new ConstraintLayout.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(currentContext, TemperatureLogActivity.class);
+                startActivity(intent);
             }
         });
 
         currentPhLayout.setOnClickListener(new ConstraintLayout.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(currentContext, PhLogActivity.class);
+                startActivity(intent);
             }
         });
 
         currentLightLayout.setOnClickListener(new ConstraintLayout.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(currentContext, LightLogActivity.class);
+                startActivity(intent);
             }
         });
     }

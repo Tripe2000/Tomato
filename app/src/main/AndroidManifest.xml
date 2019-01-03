@@ -16,8 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SensorFeedActivity" android:parentActivityName=".MainActivity" />
-        <activity android:name=".ControlSettingsActivity" android:parentActivityName=".MainActivity" ></activity>
+        <activity
+            android:name=".SensorFeedActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ControlSettingsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".TemperatureLogActivity" />
+        <activity android:name=".PhLogActivity" />
+        <activity android:name=".LightLogActivity"></activity>
     </application>
 
 </manifest>
