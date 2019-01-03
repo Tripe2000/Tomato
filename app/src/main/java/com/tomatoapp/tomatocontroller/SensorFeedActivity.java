@@ -2,6 +2,7 @@ package com.tomatoapp.tomatocontroller;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,13 +22,20 @@ public class SensorFeedActivity extends AppCompatActivity {
     SeekBar seekBar_temp;
     SeekBar seekBar_ph;
     SeekBar seekBar_light;
+
     TextView textView_desiredTemp;
     TextView textView_desiredPh;
     TextView textView_desiredLight;
-    TextView textView_desiredTemp_label;
-    TextView textView_desiredPh_label;
-    TextView textView_desiredLight_label;
+
     Button button_apply;
+
+    ConstraintLayout desiredTempLayout;
+    ConstraintLayout desiredPhLayout;
+    ConstraintLayout desiredLightLayout;
+
+    ConstraintLayout currentTempLayout;
+    ConstraintLayout currentPhLayout;
+    ConstraintLayout currentLightLayout;
 
     private void init() {
         //setup data persistence
@@ -35,16 +43,23 @@ public class SensorFeedActivity extends AppCompatActivity {
         editor = prefs.edit();
 
         //widgets
-        seekBar_temp = (SeekBar)findViewById(R.id.desiredTempBar);
-        seekBar_ph = (SeekBar)findViewById(R.id.desiredPhBar);
-        seekBar_light = (SeekBar)findViewById(R.id.desiredLightBar);
-        textView_desiredTemp = (TextView)findViewById(R.id.desiredTemp);
-        textView_desiredPh = (TextView)findViewById(R.id.desiredPh);
-        textView_desiredLight = (TextView)findViewById(R.id.desiredLight);
-        textView_desiredTemp_label = (TextView)findViewById(R.id.desiredTempLabel);
-        textView_desiredPh_label = (TextView)findViewById(R.id.desiredPhLabel);
-        textView_desiredLight_label = (TextView)findViewById(R.id.desiredLightLabel);
-        button_apply = (Button)findViewById(R.id.apply);
+        seekBar_temp = findViewById(R.id.desiredTempBar);
+        seekBar_ph = findViewById(R.id.desiredPhBar);
+        seekBar_light = findViewById(R.id.desiredLightBar);
+
+        textView_desiredTemp = findViewById(R.id.desiredTemp);
+        textView_desiredPh = findViewById(R.id.desiredPh);
+        textView_desiredLight = findViewById(R.id.desiredLight);
+
+        button_apply = findViewById(R.id.apply);
+
+        desiredTempLayout = findViewById(R.id.desiredTempLayout);
+        desiredPhLayout = findViewById(R.id.desiredPhLayout);
+        desiredLightLayout = findViewById(R.id.desiredLightLayout);
+
+        currentTempLayout = findViewById(R.id.currentTempLayout);
+        currentPhLayout = findViewById(R.id.currentPhLayout);
+        currentLightLayout = findViewById(R.id.currentLightLayout);
     }
 
     @Override
@@ -56,34 +71,34 @@ public class SensorFeedActivity extends AppCompatActivity {
         init();
 
         //set initial values of widgets
+        int flag = 0;
         button_apply.setEnabled(false);
 
         if(prefs.getBoolean(PACKAGE_NAME + R.string.control_temp_key, true)) {
             textView_desiredTemp.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_temp_key, 5)));
             seekBar_temp.setProgress(Integer.parseInt(textView_desiredTemp.getText().toString()));
         } else {
-            seekBar_temp.setVisibility(GONE);
-            textView_desiredTemp.setVisibility(GONE);
-            textView_desiredTemp_label.setVisibility(GONE);
+            desiredTempLayout.setVisibility(GONE);
+            flag++;
         }
 
         if(prefs.getBoolean(PACKAGE_NAME + R.string.control_ph_key, true)) {
             textView_desiredPh.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_ph_key, 5)));
             seekBar_ph.setProgress(Integer.parseInt(textView_desiredPh.getText().toString()));
         } else {
-            seekBar_ph.setVisibility(GONE);
-            textView_desiredPh.setVisibility(GONE);
-            textView_desiredPh_label.setVisibility(GONE);
+            desiredPhLayout.setVisibility(GONE);
+            flag++;
         }
 
         if(prefs.getBoolean(PACKAGE_NAME + R.string.control_light_key, true)) {
             textView_desiredLight.setText(String.valueOf(prefs.getInt(PACKAGE_NAME + R.string.desired_light_key, 5)));
             seekBar_light.setProgress(Integer.parseInt(textView_desiredLight.getText().toString()));
         } else {
-            seekBar_light.setVisibility(GONE);
-            textView_desiredLight.setVisibility(GONE);
-            textView_desiredLight_label.setVisibility(GONE);
+            desiredLightLayout.setVisibility(GONE);
+            flag++;
         }
+
+        if(flag == 3)   button_apply.setVisibility(GONE);
 
         //add seekbar listeners
         seekBar_temp.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -124,12 +139,31 @@ public class SensorFeedActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
+
+        //add layout listener
+        currentTempLayout.setOnClickListener(new ConstraintLayout.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        currentPhLayout.setOnClickListener(new ConstraintLayout.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        currentLightLayout.setOnClickListener(new ConstraintLayout.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
     }
 
     public void apply(View view) {
-        if(textView_desiredTemp.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_temp_key, Integer.parseInt(textView_desiredTemp.getText().toString()));
-        if(textView_desiredPh.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_ph_key, Integer.parseInt(textView_desiredPh.getText().toString()));
-        if(textView_desiredLight.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_light_key, Integer.parseInt(textView_desiredLight.getText().toString()));
+        if(desiredTempLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_temp_key, Integer.parseInt(textView_desiredTemp.getText().toString()));
+        if(desiredPhLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_ph_key, Integer.parseInt(textView_desiredPh.getText().toString()));
+        if(desiredLightLayout.getVisibility() != GONE) editor.putInt(PACKAGE_NAME + R.string.desired_light_key, Integer.parseInt(textView_desiredLight.getText().toString()));
         editor.apply();
         button_apply.setEnabled(false);
     }
